@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TravelMate | Smart Travel & Tourism</title>
+
+<style>
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f5f8fc;
+    color: #172033;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    background: rgba(255,255,255,0.96);
+    padding: 16px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #0077b6;
+}
+
+.logo span {
+    color: #ff7b00;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #172033;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #0077b6;
+}
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 25px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 620px;
+    background:
+        linear-gradient(rgba(0,30,60,.58), rgba(0,20,40,.65)),
+        url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=80");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 75px);
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #ffb703;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    background: white;
+    padding: 10px;
+    border-radius: 50px;
+    display: flex;
+    max-width: 650px;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+}
+
+.primary-btn {
+    background: #0077b6;
+    color: white;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: #005f91;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #687386;
+}
+
+/* =========================
+   DESTINATIONS
+========================= */
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.destination-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.destination-card:hover {
+    transform: translateY(-8px);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    color: #697586;
+    line-height: 1.5;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.wishlist {
+    background: #fff0f2;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+/* =========================
+   CROWD
+========================= */
+
+.crowd-section {
+    background: #eef7fb;
+}
+
+.crowd-dashboard {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.07);
+}
+
+.crowd-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+select,
+input {
+    padding: 13px;
+    border: 1px solid #d7dde5;
+    border-radius: 10px;
+    outline: none;
+}
+
+.crowd-result {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.crowd-status {
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.crowd-status .emoji {
+    font-size: 55px;
+}
+
+.crowd-status h3 {
+    font-size: 27px;
+    margin: 10px;
+}
+
+.low {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.medium {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.high {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+.very-high {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 250px;
+    border-bottom: 2px solid #ddd;
+}
+
+.bar-container {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 40px;
+    background: linear-gradient(#0077b6, #48cae4);
+    border-radius: 8px 8px 0 0;
+}
+
+.bar-label {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* =========================
+   PLANNER
+========================= */
+
+.planner {
+    background: white;
+}
+
+.planner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.form-card {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+}
+
+.result-box {
+    background: #eaf7ff;
+    padding: 30px;
+    border-radius: 18px;
+}
+
+.result-box h3 {
+    margin-bottom: 20px;
+}
+
+.itinerary-item {
+    background: white;
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #0077b6;
+}
+
+/* =========================
+   BUDGET
+========================= */
+
+.budget-section {
+    background: #f0fdf4;
+}
+
+.budget-card {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.06);
+}
+
+.budget-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.total-budget {
+    margin-top: 25px;
+    background: #0077b6;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.total-budget h2 {
+    font-size: 38px;
+}
+
+/* =========================
+   PACKING
+========================= */
+
+.packing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 15px;
+}
+
+.pack-item {
+    background: white;
+    padding: 17px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.pack-item input {
+    width: auto;
+    margin-right: 8px;
+}
+
+/* =========================
+   FOOD
+========================= */
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.food-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.food-icon {
+    font-size: 50px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz {
+    background: linear-gradient(135deg,#023e8a,#0077b6);
+    color: white;
+}
+
+.quiz-box {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    color: #172033;
+    padding: 35px;
+    border-radius: 20px;
+}
+
+.quiz-question {
+    margin-bottom: 25px;
+}
+
+.quiz-options {
+    display: grid;
+    gap: 10px;
+}
+
+.quiz-options button {
+    border: 1px solid #ddd;
+    background: white;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.quiz-options button:hover {
+    background: #eaf7ff;
+}
+
+/* =========================
+   SAFETY
+========================= */
+
+.safety-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 20px;
+}
+
+.safety-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.safety-card h3 {
+    margin-bottom: 10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #071a2b;
+    color: white;
+    padding: 45px 0;
+    text-align: center;
+}
+
+footer p {
+    color: #b6c4d2;
+    margin-top: 10px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px) {
+
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .crowd-result,
+    .planner-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .budget-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 550px;
+    }
+
+    .search-box {
+        border-radius: 15px;
+    }
+
+    .search-box button {
+        border-radius: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        Travel<span>Mate</span> 🌍
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <ul id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Explore</a></li>
+        <li><a href="#crowd">Crowd</a></li>
+        <li><a href="#planner">Trip Planner</a></li>
+        <li><a href="#budget">Budget</a></li>
+        <li><a href="#quiz">Find Destination</a></li>
+    </ul>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <h1>
+                Travel Smarter.<br>
+                Explore <span>Better.</span>
+            </h1>
+
+            <p>
+                Discover beautiful destinations, avoid overcrowded places,
+                plan your trip, calculate your budget and create your
+                perfect travel experience.
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search destination..."
+                >
+
+                <button
+                    class="primary-btn"
+                    onclick="searchDestination()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DESTINATIONS
+========================= -->
+
+<section id="destinations">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Explore Destinations</h2>
+
+            <p>
+                Discover popular places and hidden gems.
+            </p>
+
+        </div>
+
+        <div class="destination-grid" id="destinationGrid">
+
+            <!-- Cards generated by JS -->
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CROWD DETECTION
+========================= -->
+
+<section class="crowd-section" id="crowd">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>👥 Smart Crowd Awareness</h2>
+
+            <p>
+                Check crowd levels and find the best time to visit.
+            </p>
+
+        </div>
+
+        <div class="crowd-dashboard">
+
+            <div class="crowd-controls">
+
+                <select id="crowdPlace" onchange="updateCrowd()">
+
+                    <option value="goa">Goa Beach</option>
+                    <option value="manali">Manali</option>
+                    <option value="jaipur">Jaipur</option>
+                    <option value="mumbai">Gateway of India</option>
+
+                </select>
+
+                <select id="crowdTime" onchange="updateCrowd()">
+
+                    <option value="8">8:00 AM</option>
+                    <option value="10">10:00 AM</option>
+                    <option value="12">12:00 PM</option>
+                    <option value="14">2:00 PM</option>
+                    <option value="16">4:00 PM</option>
+                    <option value="18">6:00 PM</option>
+                    <option value="20">8:00 PM</option>
+
+                </select>
+
+            </div>
+
+            <div class="crowd-result">
+
+                <div
+                    class="crowd-status low"
+                    id="crowdStatus"
+                >
+
+                    <div class="emoji">🟢</div>
+
+                    <h3>Low Crowd</h3>
+
+                    <p id="crowdMessage">
+                        Great time to visit!
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h3 style="margin-bottom:20px;">
+                        Expected Crowd Throughout the Day
+                    </h3>
+
+                    <div
+                        class="chart"
+                        id="crowdChart"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TRIP PLANNER
+========================= -->
+
+<section class="planner" id="planner">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🧳 Smart Trip Planner</h2>
+
+            <p>
+                Create a personalized travel itinerary.
+            </p>
+
+        </div>
+
+
+        <div class="planner-grid">
+
+            <div class="form-card">
+
+                <div class="form-group">
+
+                    <label>Destination</label>
+
+                    <select id="tripDestination">
+
+                        <option>Goa</option>
+                        <option>Manali</option>
+                        <option>Jaipur</option>
+                        <option>Mumbai</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Number of Days</label>
+
+                    <input
+                        type="number"
+                        id="tripDays"
+                        value="3"
+                        min="1"
+                        max="15"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Number of People</label>
+
+                    <input
+                        type="number"
+                        id="people"
+                        value="2"
+                        min="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Travel Style</label>
+
+                    <select id="travelStyle">
+
+                        <option>Adventure</option>
+                        <option>Relaxation</option>
+                        <option>Culture & History</option>
+                        <option>Family</option>
+                        <option>Budget</option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="generateTrip()"
+                >
+                    Generate My Trip ✨
+                </button>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <h3>Your Itinerary</h3>
+
+                <div id="itinerary">
+
+                    <p>
+                        Enter your preferences and click
+                        <b>Generate My Trip</b>.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BUDGET
+========================= -->
+
+<section class="budget-section" id="budget">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>💰 Trip Budget Calculator</h2>
+
+            <p>
+                Estimate your total travel expenses.
+            </p>
+
+        </div>
+
+
+        <div class="budget-card">
+
+            <div class="budget-grid">
+
+                <div class="form-group">
+
+                    <label>Transportation ₹</label>
+
+                    <input
+                        type="number"
+                        id="transport"
+                        value="3000"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Hotel ₹</label>
+
+                    <input
+                        type="number"
+                        id="hotel"
+                        value="5000"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Food ₹</label>
+
+                    <input
+                        type="number"
+                        id="food"
+                        value="2500"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Activities ₹</label>
+
+                    <input
+                        type="number"
+                        id="activities"
+                        value="2000"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Shopping ₹</label>
+
+                    <input
+                        type="number"
+                        id="shopping"
+                        value="1500"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Extra/Emergency ₹</label>
+
+                    <input
+                        type="number"
+                        id="extra"
+                        value="1000"
+                        oninput="calculateBudget()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="total-budget">
+
+                <p>Estimated Trip Cost</p>
+
+                <h2 id="totalBudget">
+                    ₹15,000
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOD
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🍛 Local Food Guide</h2>
+
+            <p>
+                Taste the culture of every destination.
+            </p>
+
+        </div>
+
+
+        <div class="food-grid">
+
+            <div class="food-card">
+
+                <div class="food-icon">🥘</div>
+
+                <h3>Goa</h3>
+
+                <p>
+                    Goan Fish Curry, Bebinca, Prawn Balchao
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">🍲</div>
+
+                <h3>Manali</h3>
+
+                <p>
+                    Siddu, Thukpa, Momos
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">🍛</div>
+
+                <h3>Jaipur</h3>
+
+                <p>
+                    Dal Baati Churma, Ghewar, Pyaaz Kachori
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">🥪</div>
+
+                <h3>Mumbai</h3>
+
+                <p>
+                    Vada Pav, Pav Bhaji, Misal Pav
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PACKING
+========================= -->
+
+<section style="background:#f8fafc;">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🎒 Smart Packing Checklist</h2>
+
+            <p>
+                Don't forget important things before your journey.
+            </p>
+
+        </div>
+
+
+        <div class="packing-grid">
+
+            <label class="pack-item">
+                <input type="checkbox">
+                ID / Passport
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Phone Charger
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Power Bank
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Clothes
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Comfortable Shoes
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Medicines
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Water Bottle
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Sunscreen
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Umbrella
+            </label>
+
+            <label class="pack-item">
+                <input type="checkbox">
+                Camera
+            </label>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DESTINATION QUIZ
+========================= -->
+
+<section class="quiz" id="quiz">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🧠 Find Your Perfect Destination</h2>
+
+            <p style="color:#dbeafe;">
+                Answer a few questions and discover your ideal trip.
+            </p>
+
+        </div>
+
+
+        <div class="quiz-box">
+
+            <div class="quiz-question">
+
+                <h3>
+                    What type of trip do you prefer?
+                </h3>
+
+            </div>
+
+
+            <div class="quiz-options">
+
+                <button onclick="recommend('adventure')">
+                    🏔️ Adventure & Mountains
+                </button>
+
+                <button onclick="recommend('beach')">
+                    🏖️ Beach & Relaxation
+                </button>
+
+                <button onclick="recommend('history')">
+                    🏛️ History & Culture
+                </button>
+
+                <button onclick="recommend('city')">
+                    🌆 City & Food
+                </button>
+
+            </div>
+
+
+            <div
+                id="recommendation"
+                style="margin-top:25px;"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SAFETY
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>🚨 Travel Safety</h2>
+
+            <p>
+                Travel responsibly and stay prepared.
+            </p>
+
+        </div>
+
+
+        <div class="safety-grid">
+
+            <div class="safety-card">
+
+                <h3>🪪 Keep Documents Safe</h3>
+
+                <p>
+                    Keep digital and physical copies of important
+                    identification documents.
+                </p>
+
+            </div>
+
+
+            <div class="safety-card">
+
+                <h3>📱 Emergency Contacts</h3>
+
+                <p>
+                    Save local emergency numbers and important contacts
+                    before travelling.
+                </p>
+
+            </div>
+
+
+            <div class="safety-card">
+
+                <h3>👥 Avoid Overcrowding</h3>
+
+                <p>
+                    Check the crowd indicator and consider visiting
+                    popular locations during quieter hours.
+                </p>
+
+            </div>
+
+
+            <div class="safety-card">
+
+                <h3>💧 Stay Hydrated</h3>
+
+                <p>
+                    Carry water and follow local weather recommendations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <h2>TravelMate 🌍</h2>
+
+        <p>
+            Smart Travel & Tourism Prototype
+        </p>
+
+        <p>
+            Built with HTML • CSS • JavaScript
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   DESTINATION DATA
+========================= */
+
+const destinations = [
+
+    {
+        name: "Goa",
+        location: "India",
+        image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+        description: "Beaches, nightlife, water sports and Portuguese heritage.",
+        crowd: "Medium"
+    },
+
+    {
+        name: "Manali",
+        location: "Himachal Pradesh",
+        image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80",
+        description: "Mountains, snow, adventure activities and beautiful valleys.",
+        crowd: "High"
+    },
+
+    {
+        name: "Jaipur",
+        location: "Rajasthan",
+        image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80",
+        description: "Forts, palaces, culture, shopping and delicious food.",
+        crowd: "Medium"
+    },
+
+    {
+        name: "Mumbai",
+        location: "Maharashtra",
+        image: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80",
+        description: "Gateway of India, beaches, street food and city life.",
+        crowd: "High"
+    }
+
+];
+
+
+/* =========================
+   LOAD DESTINATIONS
+========================= */
+
+function loadDestinations(data = destinations) {
+
+    const grid = document.getElementById("destinationGrid");
+
+    grid.innerHTML = "";
+
+    data.forEach((destination, index) => {
+
+        grid.innerHTML += `
+
+            <div class="destination-card">
+
+                <img
+                    src="${destination.image}"
+                    alt="${destination.name}"
+                >
+
+                <div class="card-content">
+
+                    <h3>${destination.name}</h3>
+
+                    <p>
+                        📍 ${destination.location}
+                    </p>
+
+                    <p style="margin-top:8px;">
+                        ${destination.description}
+                    </p>
+
+                    <div class="card-actions">
+
+                        <span>
+                            👥 ${destination.crowd} Crowd
+                        </span>
+
+                        <button
+                            class="wishlist"
+                            onclick="addWishlist('${destination.name}')"
+                        >
+                            ♡ Save
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchDestination() {
+
+    const query =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (!query) {
+
+        loadDestinations();
+
+        return;
+
+    }
+
+    const results = destinations.filter(destination =>
+
+        destination.name
+        .toLowerCase()
+        .includes(query)
+
+    );
+
+    loadDestinations(results);
+
+    document
+        .getElementById("destinations")
+        .scrollIntoView();
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function addWishlist(name) {
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    if (!wishlist.includes(name)) {
+
+        wishlist.push(name);
+
+        localStorage.setItem(
+            "wishlist",
+            JSON.stringify(wishlist)
+        );
+
+        alert(name + " added to your wishlist ❤️");
+
+    } else {
+
+        alert(name + " is already in your wishlist.");
+
+    }
+
+}
+
+
+/* =========================
+   CROWD DATA
+========================= */
+
+const crowdData = {
+
+    goa: {
+        8: 20,
+        10: 30,
+        12: 50,
+        14: 65,
+        16: 80,
+        18: 90,
+        20: 70
+    },
+
+    manali: {
+        8: 30,
+        10: 45,
+        12: 60,
+        14: 75,
+        16: 90,
+        18: 80,
+        20: 55
+    },
+
+    jaipur: {
+        8: 20,
+        10: 35,
+        12: 55,
+        14: 70,
+        16: 85,
+        18: 90,
+        20: 60
+    },
+
+    mumbai: {
+        8: 35,
+        10: 50,
+        12: 65,
+        14: 75,
+        16: 90,
+        18: 95,
+        20: 75
+    }
+
+};
+
+
+function getCrowdStatus(level) {
+
+    if (level < 30) {
+
+        return {
+            text: "Low Crowd",
+            emoji: "🟢",
+            className: "low",
+            message: "Excellent time to visit!"
+        };
+
+    }
+
+    if (level < 60) {
+
+        return {
+            text: "Moderate Crowd",
+            emoji: "🟡",
+            className: "medium",
+            message: "Crowd is manageable."
+        };
+
+    }
+
+    if (level < 80) {
+
+        return {
+            text: "High Crowd",
+            emoji: "🟠",
+            className: "high",
+            message: "Expect some waiting and congestion."
+        };
+
+    }
+
+    return {
+        text: "Very High Crowd",
+        emoji: "🔴",
+        className: "very-high",
+        message: "Consider visiting at another time."
+    };
+
+}
+
+
+/* =========================
+   UPDATE CROWD
+========================= */
+
+function updateCrowd() {
+
+    const place =
+        document.getElementById("crowdPlace").value;
+
+    const time =
+        document.getElementById("crowdTime").value;
+
+    const level =
+        crowdData[place][time];
+
+    const status =
+        getCrowdStatus(level);
+
+    const statusBox =
+        document.getElementById("crowdStatus");
+
+    statusBox.className =
+        "crowd-status " + status.className;
+
+    statusBox.innerHTML = `
+
+        <div class="emoji">
+            ${status.emoji}
+        </div>
+
+        <h3>
+            ${status.text}
+        </h3>
+
+        <p>
+            Crowd Index: ${level}%
+        </p>
+
+        <p>
+            ${status.message}
+        </p>
+
+    `;
+
+    generateCrowdChart(place);
+
+}
+
+
+/* =========================
+   CROWD CHART
+========================= */
+
+function generateCrowdChart(place) {
+
+    const chart =
+        document.getElementById("crowdChart");
+
+    chart.innerHTML = "";
+
+    Object.entries(crowdData[place]).forEach(
+        ([time, level]) => {
+
+            chart.innerHTML += `
+
+                <div class="bar-container">
+
+                    <div
+                        class="bar"
+                        style="height:${level * 2}px"
+                        title="${level}% crowd"
+                    ></div>
+
+                    <div class="bar-label">
+                        ${time}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =========================
+   TRIP PLANNER
+========================= */
+
+function generateTrip() {
+
+    const destination =
+        document.getElementById("tripDestination").value;
+
+    const days =
+        Number(document.getElementById("tripDays").value);
+
+    const people =
+        Number(document.getElementById("people").value);
+
+    const style =
+        document.getElementById("travelStyle").value;
+
+    const itinerary =
+        document.getElementById("itinerary");
+
+    let activities = {
+
+        Goa: [
+            "Beach exploration",
+            "Water sports",
+            "Local market",
+            "Fort & heritage tour",
+            "Sunset cruise"
+        ],
+
+        Manali: [
+            "Mountain sightseeing",
+            "Solang Valley",
+            "Adventure activities",
+            "Local village visit",
+            "Mall Road"
+        ],
+
+        Jaipur: [
+            "Amber Fort",
+            "City Palace",
+            "Hawa Mahal",
+            "Local market",
+            "Cultural experience"
+        ],
+
+        Mumbai: [
+            "Gateway of India",
+            "Marine Drive",
+            "Elephanta Caves",
+            "Street food tour",
+            "Local market"
+        ]
+
+    };
+
+    let places =
+        activities[destination];
+
+    let html = `
+
+        <p style="margin-bottom:15px;">
+            <b>${destination}</b> •
+            ${days} Days •
+            ${people} People •
+            ${style}
+        </p>
+
+    `;
+
+    for (let i = 1; i <= days; i++) {
+
+        const activity =
+            places[(i - 1) % places.length];
+
+        html += `
+
+            <div class="itinerary-item">
+
+                <b>Day ${i}</b>
+
+                <p style="margin-top:6px;">
+                    📍 ${activity}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+    itinerary.innerHTML = html;
+
+}
+
+
+/* =========================
+   BUDGET CALCULATOR
+========================= */
+
+function calculateBudget() {
+
+    const ids = [
+        "transport",
+        "hotel",
+        "food",
+        "activities",
+        "shopping",
+        "extra"
+    ];
+
+    let total = 0;
+
+    ids.forEach(id => {
+
+        total +=
+            Number(document.getElementById(id).value) || 0;
+
+    });
+
+    document.getElementById("totalBudget")
+        .innerText =
+        "₹" + total.toLocaleString("en-IN");
+
+}
+
+
+/* =========================
+   DESTINATION QUIZ
+========================= */
+
+function recommend(type) {
+
+    const recommendations = {
+
+        adventure: {
+            destination: "Manali 🏔️",
+            text: "Perfect for mountains, trekking, snow and adventure."
+        },
+
+        beach: {
+            destination: "Goa 🏖️",
+            text: "Perfect for beaches, relaxation, water sports and nightlife."
+        },
+
+        history: {
+            destination: "Jaipur 🏛️",
+            text: "Perfect for forts, palaces, culture and history."
+        },
+
+        city: {
+            destination: "Mumbai 🌆",
+            text: "Perfect for food, entertainment, shopping and city experiences."
+        }
+
+    };
+
+    const result =
+        recommendations[type];
+
+    document.getElementById("recommendation")
+        .innerHTML = `
+
+            <div
+                style="
+                    background:#eaf7ff;
+                    padding:20px;
+                    border-radius:12px;
+                "
+            >
+
+                <h3>
+                    We Recommend: ${result.destination}
+                </h3>
+
+                <p style="margin-top:8px;">
+                    ${result.text}
+                </p>
+
+            </div>
+
+        `;
+
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu() {
+
+    document
+        .getElementById("navMenu")
+        .classList
+        .toggle("active");
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+loadDestinations();
+
+updateCrowd();
+
+calculateBudget();
+
+</script>
+
+</body>
+</html>
